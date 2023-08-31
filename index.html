@@ -1,0 +1,1959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Incident Dashboard</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap');
+
+        .wrapper{
+            background-image: url('https://i.ibb.co/cYdsCWT/image-5.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            
+        }
+
+        #content{
+            position: relative;
+        }
+
+        .zone_main{
+            margin-left: 10px;
+            margin-right: 10px;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            overflow: hidden;
+        }
+        
+        .zonehead_one{
+            background-color: rgba(255, 199, 0, 1);
+            padding: 5px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: white;
+        }
+        .zonecontent_one{
+            background-color: rgba(255, 199, 0, 1);
+            padding: 5px;
+            color: white;
+        }
+
+
+        .zonehead_two{
+            background-color: rgba(80, 205, 137, 1);
+            padding: 5px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: white;
+        }
+        .zonecontent_two{
+            background-color: rgba(80, 205, 137, 1);
+            padding: 5px;
+            color: white;
+        }
+
+        .zonehead_three{
+            background-color: rgba(80, 205, 137, 1);
+            padding: 5px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: white;
+        }
+        .zonecontent_three{
+            background-color: rgba(80, 205, 137, 1);
+            padding: 5px;
+            color: white;
+        }
+
+        .zonehead_four{
+            background-color: rgba(241, 65, 108, 1);
+            padding: 5px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: white;
+        }
+        .zonecontent_four{
+            background-color: rgba(241, 65, 108, 1);
+            padding: 5px;
+            color: white;
+        }
+
+        .zonehead_five{
+            background-color: rgba(241, 65, 108, 1);
+            padding: 5px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: white;
+        }
+        .zonecontent_five{
+            background-color: rgba(241, 65, 108, 1);
+            padding: 5px;
+            color: white;
+        }
+
+        .zonehead_six{
+            background-color: rgba(255, 199, 0, 1);
+            padding: 5px;
+            font-size: 20px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+            color: white;
+        }
+        .zonecontent_six{
+            background-color: rgba(255, 199, 0, 1);
+            padding: 5px;
+            color: white;
+        }
+        .modal-header{
+            border-bottom: 20px solid rgba(80, 205, 137, 1) !important;
+        }
+
+
+
+
+        a,
+a:hover,
+a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+
+
+.line {
+    width: 100%;
+    height: 1px;
+    border-bottom: 1px dashed #ddd;
+    margin: 40px 0;
+}
+
+/* ---------------------------------------------------
+    SIDEBAR STYLE
+----------------------------------------------------- */
+
+.wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: rgba(248, 248, 248, 1);
+    color: black;
+    transition: all 0.3s;
+}
+
+#sidebar.active {
+    margin-left: -250px;
+}
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: rgba(248, 248, 248, 1);
+}
+
+#content {
+    width: 100%;
+    padding: 20px;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+.navbar{
+    background-color: transparent !important;
+}
+.mbutton:hover{
+    color: rgba(80, 205, 137, 1) !important;
+}
+
+/* Zone btn */
+.zonebtn{
+   background-color: rgba(0, 149, 232, 1);
+   color: white;
+   padding: 5px 14px 5px 14px;
+   border-radius: 5px;
+   border: 2px solid rgba(0, 149, 232, 1);
+}
+.zonebtn:hover{
+    background-color: rgb(5, 126, 192);
+}
+.base_modal{
+    border-bottom: 0 !important;
+    padding-top: 5px !important;
+    padding-bottom: 3px !important;
+}
+
+.base_main{
+    position: relative;
+    padding-top: 4px !important;
+    padding-bottom: 10px !important;
+}
+
+.camera_base{
+    background-color: white;
+    position: absolute;
+    top: 35px;
+    right: 35px;
+    border: 2px solid white;
+    border-radius: 5px;
+    text-align: center;
+}
+.camera_base div:first-child{
+    background-color: rgba(80, 205, 137, 1);
+    text-align: center;
+    color: white;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+.camera_base div:nth-child(2){
+    padding: 5px;
+    background-color: white;
+}
+.camera_base button{
+    width: 80%;
+    border: 2px solid rgba(0, 149, 232, 1);
+    background-color: rgba(0, 149, 232, 1);
+    color: white;
+    border-radius: 5px;
+    margin-bottom: 2px;
+}
+.camera_base button:hover{
+    background-color: rgb(1, 114, 175);
+}
+.basealarm_btn{
+    width: 100%;
+    background-color: rgba(80, 205, 137, 1);
+    border: 2px solid rgba(80, 205, 137, 1);
+    padding: 6px;
+    border-radius: 5px;
+    margin-top: 10px;
+    color: white;
+}
+.alert_group{
+    padding: 0px 4px 4px 10px;
+    background-color: rgba(238, 238, 238, 1);
+    border: 2px solid rgba(238, 238, 238, 1);
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+/* Collapse Btn */
+
+
+.btn-info{
+    background-color: #50cd89 ;
+    color: white;
+    border-color: #50cd89;
+}
+.btn-info:hover{
+    background-color: white;
+    border-color: white;
+    color: black;
+}
+
+/* Sidebar Content */
+.sidebar_main{
+    padding-top: 64px;
+}
+.sidebar_input{
+    padding: 5px 2px 5px 10px;
+}
+.form input{
+            background-color: #f9f9f9 !important;
+            border: 0 !important;
+        }
+        .form-control:focus{
+            box-shadow: none;
+            border-color: #50cd89;
+        }
+        .accordion-button:focus {
+    z-index: 3;
+    border-color: white !important;
+    outline: 0;
+    box-shadow: none !important;
+}
+.accordion-button:not(.collapsed){
+    color: white !important;
+    background-color: #50cd89 !important;
+    box-shadow: none !important;
+}
+
+
+        @media screen and (max-width:768px) {
+            .zonecontent_one{
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+            .zonecontent_two{
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+            .zonecontent_three{
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;
+            }
+
+    #sidebar {
+        margin-left: -250px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 99;
+    }
+    #sidebar.active {
+        margin-left: 0;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        z-index: 99;
+    }
+    #sidebarCollapse span {
+        display: none;
+    }
+    #sidebarCollapse{
+        z-index: 99;
+        position: fixed;
+        left: 10px;
+    }
+
+    .btn-info:hover{
+    background-color: rgba(241, 65, 108, 1);
+    border-color: rgba(241, 65, 108, 1);
+    color: white;
+}
+    
+    }
+        
+
+
+    </style>
+</head>
+<body>
+
+
+    <section class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+           
+
+            <div class="sidebar_main">
+
+                <div class="sidebar_input">
+                    <form class="d-flex" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    </form>
+                </div>
+
+                <div class="accordion accordion-flush mt-3" id="accordionFlushExample">
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                            <i class="fa-solid fa-plane-up" style="color: #080808;"></i> <span style="display: inline-block; margin-left: 14px;">KLIA 1</span>
+                        </button>
+                      </h2>
+                      <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, eos?</div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                            <i class="fa-solid fa-location-dot" style="color: #000000;"></i> <span style="display: inline-block; margin-left: 14px;">Zone</span>
+                        </button>
+                      </h2>
+                      <div id="flush-collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tenetur inventore incidunt quibusdam illo excepturi architecto obcaecati odio laboriosam libero animi?</div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                      <h2 class="accordion-header">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                            <i class="fa-solid fa-camera" style="color: #000000;"></i> <span style="display: inline-block; margin-left: 14px;">Camera</span>
+                        </button>
+                      </h2>
+                      <div id="flush-collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo quae atque maiores dicta repellendus ullam!</div>
+                      </div>
+                    </div>
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapsefour" aria-expanded="false" aria-controls="flush-collapsefour">
+                            <i class="fa-solid fa-door-open" style="color: #000000;"></i> <span style="display: inline-block; margin-left: 14px;">Doors</span>
+                          </button>
+                        </h2>
+                        <div id="flush-collapsefour" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                          <div class="accordion-body">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+                        </div>
+                      </div>
+                  </div>
+
+
+            </div>
+            
+    
+            
+        </nav>
+    
+        <!-- Page Content  -->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fas fa-align-left"></i>
+                    </button>
+                </div>
+            </nav>
+
+
+            <div class="zone_main">
+
+                <div class="row gy-2">
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-4 text-center" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#zoneModal" data-zone="1">
+                                <div class="zonehead_one">
+                                    Zone 1
+                                </div>
+                                <div class="zonecontent_one">
+                                    747 Alarm
+                                </div>
+                            </div>
+    
+                            <div class="col-4 text-center" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#zoneModal2" data-zone="1">
+                                <div class="zonehead_two">
+                                    Zone 2
+                                </div>
+                                <div class="zonecontent_two">
+                                    12 Alarm
+                                </div>
+                            </div>
+    
+                            <div class="col-4 text-center" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#zoneModal3" data-zone="1">
+                                <div class="zonehead_three">
+                                    Zone 3
+                                </div>
+                                <div class="zonecontent_three">
+                                    100 Alarm
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-4 text-center" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#zoneModal4" data-zone="1">
+                                <div class="zonehead_four">
+                                    Zone 4
+                                </div>
+                                <div class="zonecontent_four">
+                                    1236 Alarm
+                                </div>
+                            </div>
+    
+                            <div class="col-4 text-center" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#zoneModal5" data-zone="1">
+                                <div class="zonehead_five">
+                                    Zone 5
+                                </div>
+                                <div class="zonecontent_five">
+                                    6345 Alarm
+                                </div>
+                            </div>
+    
+                            <div class="col-4 text-center" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#zoneModal6" data-zone="1">
+                                <div class="zonehead_six">
+                                    Zone 6
+                                </div>
+                                <div class="zonecontent_six">
+                                    345 Alarm
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+    
+               
+    
+            </div>
+    
+            <div class="modal fade" id="zoneModal" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="zoneModalLabel">Zone 1</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="zoneModalBody">
+                            <div class="row gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        MTB
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" data-bs-toggle="modal" data-bs-target="#zoneModal11" data-zone="1" >Basement</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Ground</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Stn Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        3
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Arrival</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Departure</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+    
+            <div class="modal fade" id="zoneModal2" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="zoneModalLabel">Zone 2</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="zoneModalBody">
+                            <div class="row gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        MTB
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" data-bs-toggle="modal" data-bs-target="#zoneModal12" data-zone="1">Basement</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Ground</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Stn Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        3
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Arrival</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Departure</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="modal fade" id="zoneModal3" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="zoneModalLabel">Zone 3</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="zoneModalBody">
+                            <div class="row gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        MTB
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" data-bs-toggle="modal" data-bs-target="#zoneModal13" data-zone="1">Basement</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Ground</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Stn Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        3
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Arrival</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Departure</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="modal fade" id="zoneModal4" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="zoneModalLabel">Zone 4</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="zoneModalBody">
+                            <div class="row gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        MTB
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" data-bs-toggle="modal" data-bs-target="#zoneModal14" data-zone="1">Basement</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Ground</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Stn Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        3
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Arrival</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Departure</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="modal fade" id="zoneModal5" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="zoneModalLabel">Zone 5</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="zoneModalBody">
+                            <div class="row gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        MTB
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" data-bs-toggle="modal" data-bs-target="#zoneModal15" data-zone="1">Basement</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Ground</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Stn Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        3
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Arrival</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Departure</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="modal fade" id="zoneModal6" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="zoneModalLabel">Zone 6</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body" id="zoneModalBody">
+                            <div class="row gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        MTB
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" data-bs-toggle="modal" data-bs-target="#zoneModal16" data-zone="1">Basement</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Ground</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        2
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Stn Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        3
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Arrival</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Departure</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        <button class="mbutton" style="background-color: transparent; width: 100%; border: none;" >Mezzanine</button>
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-6 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        0
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+    
+                            <div class="row mt-3 gx-3">
+                                <div class="col-6 text-center">
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        CP
+                                    </div>
+                                    
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                        12
+                                    </div>
+                                   
+                                </div>
+                                <div class="col-3 text-center" >
+                                    <div style="background-color: rgba(246, 245, 245, 1); padding: 8px 5px 5px 5px; height: 40px; border-radius: 5px;">
+                                         <button style="border: 0; background-color: transparent;"><i class="fa-sharp fa-solid fa-angle-down fa-rotate-270" style="color: #f1416c;"></i></button>
+                                    </div>
+    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Modal For basement -->
+            <div class="modal fade" id="zoneModal11" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header base_modal">
+                            <h5 class="modal-title" id="zoneModalLabel">
+                                <button class="zonebtn">Zone 1</button>
+                                <h5 style="margin-left: 20px; margin-top: 5px;">Basement</h5>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body base_main" id="zoneModalBody">
+                            <img class="img-fluid" src="https://i.ibb.co/1XX6wxV/image-28-1.png" alt="BasePicture">
+                            <div class="camera_base">
+                                <div>
+                                    Camera 0010
+                                </div>
+                                <div>
+                                    <img class="img-fluid" src="https://i.ibb.co/qY84bb0/Rectangle-623.png" alt="camera">
+                                </div>
+                                <div class="text-center">
+                                    <span style="font-size: 12px;">Status: Online</span>
+                                </div>
+                                <button>Preview</button>
+                            </div>
+
+                            <div>
+                                <button class="basealarm_btn">Alarm</button>
+                            </div>
+
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #50cd89;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Login Failed</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 404</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #ffc700;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="zoneModal12" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header base_modal">
+                            <h5 class="modal-title" id="zoneModalLabel">
+                                <button class="zonebtn">Zone 2</button>
+                                <h5 style="margin-left: 20px; margin-top: 5px;">Basement</h5>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body base_main" id="zoneModalBody">
+                            <img class="img-fluid" src="https://i.ibb.co/1XX6wxV/image-28-1.png" alt="BasePicture">
+                            <div class="camera_base">
+                                <div>
+                                    Camera 0010
+                                </div>
+                                <div>
+                                    <img class="img-fluid" src="https://i.ibb.co/qY84bb0/Rectangle-623.png" alt="camera">
+                                </div>
+                                <div class="text-center">
+                                    <span style="font-size: 12px;">Status: Online</span>
+                                </div>
+                                <button>Preview</button>
+                            </div>
+
+                            <div>
+                                <button class="basealarm_btn">Alarm</button>
+                            </div>
+
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #50cd89;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Login Failed</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 404</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #ffc700;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="zoneModal13" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header base_modal">
+                            <h5 class="modal-title" id="zoneModalLabel">
+                                <button class="zonebtn">Zone 3</button>
+                                <h5 style="margin-left: 20px; margin-top: 5px;">Basement</h5>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body base_main" id="zoneModalBody">
+                            <img class="img-fluid" src="https://i.ibb.co/1XX6wxV/image-28-1.png" alt="BasePicture">
+                            <div class="camera_base">
+                                <div>
+                                    Camera 0010
+                                </div>
+                                <div>
+                                    <img class="img-fluid" src="https://i.ibb.co/qY84bb0/Rectangle-623.png" alt="camera">
+                                </div>
+                                <div class="text-center">
+                                    <span style="font-size: 12px;">Status: Online</span>
+                                </div>
+                                <button>Preview</button>
+                            </div>
+
+                            <div>
+                                <button class="basealarm_btn">Alarm</button>
+                            </div>
+
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #50cd89;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Login Failed</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 404</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #ffc700;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="zoneModal14" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header base_modal">
+                            <h5 class="modal-title" id="zoneModalLabel">
+                                <button class="zonebtn">Zone 4</button>
+                                <h5 style="margin-left: 20px; margin-top: 5px;">Basement</h5>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body base_main" id="zoneModalBody">
+                            <img class="img-fluid" src="https://i.ibb.co/1XX6wxV/image-28-1.png" alt="BasePicture">
+                            <div class="camera_base">
+                                <div>
+                                    Camera 0010
+                                </div>
+                                <div>
+                                    <img class="img-fluid" src="https://i.ibb.co/qY84bb0/Rectangle-623.png" alt="camera">
+                                </div>
+                                <div class="text-center">
+                                    <span style="font-size: 12px;">Status: Online</span>
+                                </div>
+                                <button>Preview</button>
+                            </div>
+
+                            <div>
+                                <button class="basealarm_btn">Alarm</button>
+                            </div>
+
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #50cd89;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Login Failed</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 404</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #ffc700;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="zoneModal15" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header base_modal">
+                            <h5 class="modal-title" id="zoneModalLabel">
+                                <button class="zonebtn">Zone 5</button>
+                                <h5 style="margin-left: 20px; margin-top: 5px;">Basement</h5>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body base_main" id="zoneModalBody">
+                            <img class="img-fluid" src="https://i.ibb.co/1XX6wxV/image-28-1.png" alt="BasePicture">
+                            <div class="camera_base">
+                                <div>
+                                    Camera 0010
+                                </div>
+                                <div>
+                                    <img class="img-fluid" src="https://i.ibb.co/qY84bb0/Rectangle-623.png" alt="camera">
+                                </div>
+                                <div class="text-center">
+                                    <span style="font-size: 12px;">Status: Online</span>
+                                </div>
+                                <button>Preview</button>
+                            </div>
+
+                            <div>
+                                <button class="basealarm_btn">Alarm</button>
+                            </div>
+
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #50cd89;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Login Failed</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 404</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #ffc700;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade" id="zoneModal16" tabindex="-1" aria-labelledby="zoneModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header base_modal">
+                            <h5 class="modal-title" id="zoneModalLabel">
+                                <button class="zonebtn">Zone 6</button>
+                                <h5 style="margin-left: 20px; margin-top: 5px;">Basement</h5>
+                            </h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body base_main" id="zoneModalBody">
+                            <img class="img-fluid" src="https://i.ibb.co/1XX6wxV/image-28-1.png" alt="BasePicture">
+                            <div class="camera_base">
+                                <div>
+                                    Camera 0010
+                                </div>
+                                <div>
+                                    <img class="img-fluid" src="https://i.ibb.co/qY84bb0/Rectangle-623.png" alt="camera">
+                                </div>
+                                <div class="text-center">
+                                    <span style="font-size: 12px;">Status: Online</span>
+                                </div>
+                                <button>Preview</button>
+                            </div>
+
+                            <div>
+                                <button class="basealarm_btn">Alarm</button>
+                            </div>
+
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #50cd89;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Login Failed</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #d9214e;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 404</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            <div class="alert_group d-flex text-start align-items-center">
+                                <div style="font-size: 34px; margin-top: 5px;">
+                                    <i class="fa-solid fa-circle-exclamation" style="color: #ffc700;"></i>
+                                </div>
+                                <div style="margin-top: 5px; margin-left: 20px;" class="d-flex flex-column">
+                                    <span style="font-size: 20px; font-weight: bold;">Error 432</span>
+                                    <span>Camera Stop Recording</span>
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+    
+            
+            
+        </div>
+    </section>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+
+    <script>
+        const zoneElements = document.querySelectorAll('[data-zone]');
+        const zoneModal = new bootstrap.Modal(document.getElementById('zoneModal'));
+
+        zoneElements.forEach((element) => {
+            element.addEventListener('click', () => {
+                const zone = element.getAttribute('data-zone');
+                const zonehead = element.querySelector('.zonehead');
+                const zonecontent = element.querySelector('.zonecontent');
+
+                const modalTitle = document.getElementById('zoneModalLabel');
+                modalTitle.textContent = zonehead.textContent;
+
+                const modalBody = document.getElementById('zoneModalBody');
+                modalBody.innerHTML = zonecontent.innerHTML;
+
+                zoneModal.show();
+            });
+        });
+    </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    const sidebarCollapse = document.getElementById("sidebarCollapse");
+    const sidebar = document.getElementById("sidebar");
+  
+    sidebarCollapse.addEventListener("click", function () {
+      sidebar.classList.toggle("active");
+    });
+  });
+  
+  
+  
+  
+  
+    </script>
+
+    
+</body>
+</html>
